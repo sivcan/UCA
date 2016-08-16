@@ -40,6 +40,7 @@ void heapSort(int arr[]) {
     }
 }
 
+
 int main() {
     cout<<"\nProgram to implement Heapsort.\n";
     cout<<"\nEnter the size of the array  :";
@@ -52,7 +53,7 @@ int main() {
         cin>>arr[i];
     }
 
-    //Calling the heapsort function
+    //Calling the heapsort function5
     heapSort(arr);
 
     cout<<"\nAfter sorting : \n";
