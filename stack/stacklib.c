@@ -2,7 +2,6 @@
 //Design Paradigm is "Modular Programming"
 //Modular Programming is the dissociation of interface from definition
 #include <stdlib.h>
-#include "stack.h"
 
 struct Node {
     int item;

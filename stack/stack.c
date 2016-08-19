@@ -2,6 +2,7 @@
 #include "stack.h"
 #include <stdlib.h>
 //Client file
+
 int main() {
     push(3);
     push(5);
