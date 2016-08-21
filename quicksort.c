@@ -6,13 +6,6 @@ int randomPivot(int left, int right) {
     return (left + r);
 }
 
-void swap(int *x, int *y) {
-    int *temp;
-    temp = x;
-    x = y;
-    y = temp;
-}
-
 int partition(int arr[], int l, int h) {
 
     int pivot = arr[randomPivot(l,h)];
