@@ -1,4 +1,4 @@
-#include <stdio.h>
+2#include <stdio.h>
 #include <stdlib.h>
 
 int randomPivot(int left, int right) {

@@ -24,6 +24,7 @@ void merge(int arr[], int beg, int mid, int end)
 			brr[k++] = arr[j++];
 		}
 	}
+
 	else {
 		while(i <= mid) {
 			brr[k++] = arr[i++];
