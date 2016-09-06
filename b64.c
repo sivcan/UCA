@@ -30,7 +30,12 @@ int base64_encode(unsigned char in[], unsigned char out[], int len, int new_flag
         out[idx2+3] = charset[((in[idx+2] & 63))];
     }
 
-    left_over = len % 3;
+    for(idx = 0, idx2 = 0; idx < blocks; idx+=3, idx4+=4) {
+        out[idx2] = charset[ in[idx] >> 2];
+        out[idx2+1] = charset[ in[idx] & 3 << 4 + in[idx+1] >> 4];
+        out[idx2+2] = charset [ in[idx+1] & 15 << 2 + in[idx + 2] >> 6];
+        out[idx2+3] = charset[ in[idx+2] & 63];
+    }
 
     if(left_over == 1) {
         out[idx2] = charset[in[idx] >> 2];
