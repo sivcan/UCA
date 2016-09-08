@@ -34,14 +34,16 @@ class LinkedList {
             System.out.println("The list is empty.");
             return -999;
         }
+        Node oldFirst = first;
         int val = first.item;
         first = first.next;
+        oldFirst = null; //Let the garbage collector reclaim the memory. We don't need the reference of the first node anymore.
         return val;
     }
 
     public static void main(String args[]) {
 
-        System.out.println("Linked List.\nEnter the number of elements : ");
+        System.out.println("Linked List as a push down Stack.\nEnter the number of elements : ");
         LinkedList list = new LinkedList();
         Scanner scan = new Scanner(System.in);
         int n = scan.nextInt();
@@ -58,8 +60,6 @@ class LinkedList {
         int x = list.pop();
         System.out.println("Printing the elements after popping top : " + x);
         list.display();
-
-
 
     }
 
