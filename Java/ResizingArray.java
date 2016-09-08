@@ -11,6 +11,14 @@ class ResizingArray {
         s[N++] = item;
     }
 
+    public String pop() {
+        String item  = s[--N];
+        s[N] = null;
+        if(N > 0 && N == s.length/4) //Only resize the array when the array is <= 25% full..that is array is not 25-100% full.
+            resize(s.length/2);
+        return item;
+    }
+
     public void resize(int capacity) {
         String[] copy = new String[capacity];
         System.out.println("The new capacity for the dynamic array is : " + capacity + "\n");
@@ -40,6 +48,12 @@ class ResizingArray {
         obj.push("Deep Learning");
         obj.display();
         obj.push("Augmented Reality");
+        obj.push("Virtual Reality");
+        obj.display();
+
+        for(int i = 0; i < 4; i++)
+            obj.pop();
+
         obj.display();
 
     }
