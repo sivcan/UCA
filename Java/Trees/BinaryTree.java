@@ -55,13 +55,13 @@ public class BinaryTree {
     }
 
     int getMin(Node n) {
-        if(n.left == null) {
+        if(n.left == null) {  //Gets the minimum value of the tree by reaching the last left-node.
             return n.key;
         }
         return getMin(n.left);
     }
 
-    int getMax(Node n) {
+    int getMax(Node n) {  //Gets the maximum value of the tree by reaching the last right-node.
         if(n.right == null) {
             return n.key;
         }
@@ -70,9 +70,9 @@ public class BinaryTree {
 
     void display(Node n) {
 
-        if(n != null) {
-            System.out.println(n.key);
+        if(n != null) {  //Inorder traversal, thus also shows the sorted array. (ascending order)
             display(n.left);
+            System.out.println(n.key);
             display(n.right);
         }
     }
@@ -91,31 +91,69 @@ public class BinaryTree {
 
         if(key > n.key)
             n.right = delNode(n.right, key);
+
         else if(key < n.key)
             n.left = delNode(n.left, key);
+
+        else {                                          //Node found, time to delete it!
+
+            if(n.left == null)  //Node with 1 child on the right
+                return n.right;
+
+            else if(n.right == null) //Node with 1 child on the left
+                return n.left;
+
+             //Node with 2 children.
+                n.key = getMin(n.right);
+                n.right = delNode(n.right, n.key);
+        }
         return n;
-        
+    }
+
+    void findCommon(Node root2) {
+
     }
 
     public static void main(String args[]) {
         System.out.println("BST!");
         BinaryTree x = new BinaryTree();
-        x.insert(5);
+        // {20,8,22,4,12,10,14}
+        x.insert(10);
+        x.insert(7);
         x.insert(4);
-        x.insert(6);
-        x.insert(3);
-        x.insert(8);
         x.insert(9);
-
+        x.insert(20);
         x.display(x.root); // Display the tree in preorder.
 
-        System.out.println("After searching for 5 : " + x.search(x.root,5));
-        System.out.println("After searching for 21 : " + x.search(x.root,21));
-        System.out.println("The minimum is : " + x.getMin(x.root));
-        System.out.println("The maximum is : " + x.getMax(x.root));
-        x.del(6);
-        x.display(x.root);
-
+        // System.out.println("After searching for 5 : " + x.search(x.root,60));
+        // System.out.println("After searching for 21 : " + x.search(x.root,229));
+        // System.out.println("The minimum is : " + x.getMin(x.root));
+        // System.out.println("The maximum is : " + x.getMax(x.root));
+        //
+        //
+        // System.out.println("After deleting 20 : ");
+        // x.del(20);
+        // x.display(x.root);
+        //
+        // System.out.println("After deleting 30 : ");
+        // x.del(30);
+        // x.display(x.root);
+        //
+        // System.out.println("After deleting 50 : ");
+        // x.del(50);
+        // x.display(x.root);
+        System.out.println("Second tree : "); // Find the common nodes in between the trees.
+        BinaryTree y = new BinaryTree();
+        y.insert(5);
+        y.insert(1);
+        y.insert(10);
+        y.insert(7);
+        y.insert(9);
+        y.insert(4);
+        y.insert(7);
+        y.insert(0);
+        y.display(y.root);
+        x.findCommon(y.root);
     }
 
 }
