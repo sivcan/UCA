@@ -1,4 +1,4 @@
-
+import java.util.*;
 public class BinaryTree {
 
     class Node {
@@ -82,7 +82,7 @@ public class BinaryTree {
             root = delNode(root,key);
     }
 
-    Node delNode(Node n, int key) {
+    Node delNode(Node n, int key) { //Function delete the given node.
 
         if(n.right == null)
             return n.left;
@@ -110,7 +110,9 @@ public class BinaryTree {
         return n;
     }
 
-    void findCommon(Node root2) {
+    void findCommon(Node root1, Node root2) { //Yet to be completed.
+        ArrayList<Integer> one = new ArrayList<Integer>();
+        ArrayList<Integer> two = new ArrayList<Integer>();
 
     }
 
@@ -123,8 +125,10 @@ public class BinaryTree {
         x.insert(4);
         x.insert(9);
         x.insert(20);
-        x.display(x.root); // Display the tree in preorder.
+        x.display(x.root); // Inorder tree traversal.
 
+        //The lines of code down below work. Uncomment them to test the code.
+        
         // System.out.println("After searching for 5 : " + x.search(x.root,60));
         // System.out.println("After searching for 21 : " + x.search(x.root,229));
         // System.out.println("The minimum is : " + x.getMin(x.root));
@@ -153,7 +157,6 @@ public class BinaryTree {
         y.insert(7);
         y.insert(0);
         y.display(y.root);
-        x.findCommon(y.root);
+        x.findCommon(x.root, y.root);
     }
-
 }
