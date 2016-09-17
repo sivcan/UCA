@@ -84,11 +84,6 @@ public class BinaryTree {
 
     Node delNode(Node n, int key) { //Function delete the given node.
 
-        if(n.right == null)
-            return n.left;
-        if(n.left == null)
-            return n.right;
-
         if(key > n.key)
             n.right = delNode(n.right, key);
 
@@ -128,7 +123,7 @@ public class BinaryTree {
         x.display(x.root); // Inorder tree traversal.
 
         //The lines of code down below work. Uncomment them to test the code.
-        
+
         // System.out.println("After searching for 5 : " + x.search(x.root,60));
         // System.out.println("After searching for 21 : " + x.search(x.root,229));
         // System.out.println("The minimum is : " + x.getMin(x.root));

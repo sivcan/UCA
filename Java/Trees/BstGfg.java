@@ -33,6 +33,7 @@ public class BstGfg{
         }
 
         else if(key  > root.key) {
+            succ = root;
             root.right = insertNode(root.right, key);
         }
 
@@ -43,19 +44,9 @@ public class BstGfg{
     }
 
     void display(Node root) {
-        if(root!=null) {
-            System.out.println(root.key);
-            display(root.right);
-        }
-        else {
-            System.out.println("-1");
-        }
-    }
-
-    getMax(){
 
     }
-)
+
     public static void main(String args[]) {
         System.out.println("Greater on right - Gfg.");
         System.out.println("The link : http://www.geeksforgeeks.org/replace-every-element-with-the-least-greater-element-on-its-right/\n");
