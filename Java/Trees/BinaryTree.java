@@ -84,6 +84,9 @@ public class BinaryTree {
 
     Node delNode(Node n, int key) { //Function delete the given node.
 
+        if(n == null) 
+            return n;
+
         if(key > n.key)
             n.right = delNode(n.right, key);
 
