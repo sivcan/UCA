@@ -18,11 +18,12 @@ public class BinaryTree {
         root = null;
     }
 
-    void insert(int key){
+    void insert(int key) {
         root = insertNode(root,key);
     }
 
     Node insertNode(Node n, int key) {
+
         if(n == null)
         {
             return new Node(key);
@@ -36,6 +37,7 @@ public class BinaryTree {
             n.right = insertNode(n.right, key);
         }
         return n;
+
     }
 
     boolean search(Node n, int key) {
@@ -82,33 +84,47 @@ public class BinaryTree {
             root = delNode(root,key);
     }
 
-    Node delNode(Node n, int key) { //Function delete the given node.
+    Node delNode(Node root, int key) {
+        if(root == null)
+            return root;
+        if(key > root.key)
+            root.right = delNode(root.right, key);
+        else if(key < root.key)
+            root.left = delNode(root.left, key);
+        else {
+            if(root.right == null)
+                return root.left;
+            else if(root.left == null)
+                return root.right;
 
-        if(n == null) 
-            return n;
-
-        if(key > n.key)
-            n.right = delNode(n.right, key);
-
-        else if(key < n.key)
-            n.left = delNode(n.left, key);
-
-        else {                                          //Node found, time to delete it!
-
-            if(n.left == null)  //Node with 1 child on the right
-                return n.right;
-
-            else if(n.right == null) //Node with 1 child on the left
-                return n.left;
-
-             //Node with 2 children.
-                n.key = getMin(n.right);
-                n.right = delNode(n.right, n.key);
+            root.key = getMin(root.right);
+            root.right = delNode(root.right, key);
         }
-        return n;
+        return root;
     }
 
-    void findCommon(Node root1, Node root2) { //Yet to be completed.
+    ArrayList<Integer> generateInorder(Node root, ArrayList<Integer> x) {
+        if(root!=null) {
+            x.add(root.key);
+            generateInorder(root.left, x);
+            generateInorder(root.right, x);
+        }
+        return x;
+    }
+
+    void checkPreorder(int[] a) {
+        ArrayList<Integer> x = new ArrayList<>();
+        x = generateInorder(root, x);
+        for(int i = 0; i < x.size(); i++) {
+            if(a[i] != x.get(i)) {
+                System.out.println("Order failed to match. -1");
+                return;
+            }
+        }
+        System.out.println("Success! 1. The PreOrder matches!");
+    }
+
+     void findCommon(Node root1, Node root2) { //Yet to be completed.
         ArrayList<Integer> one = new ArrayList<Integer>();
         ArrayList<Integer> two = new ArrayList<Integer>();
 
@@ -123,7 +139,7 @@ public class BinaryTree {
         x.insert(4);
         x.insert(9);
         x.insert(20);
-        x.display(x.root); // Inorder tree traversal.
+        //x.display(x.root); // Inorder tree traversal.
 
         //The lines of code down below work. Uncomment them to test the code.
 
@@ -144,6 +160,17 @@ public class BinaryTree {
         // System.out.println("After deleting 50 : ");
         // x.del(50);
         // x.display(x.root);
+
+        int[] a = {50, 39, 44, 28, 85}; //Question to check if the preorder list is equal to the tree preorder and forms a valid BST.
+
+        x.root = null;
+
+        for(int i = 0; i < a.length; i++) {
+            x.insert(a[i]);
+        }
+
+        x.checkPreorder(a);
+
         System.out.println("Second tree : "); // Find the common nodes in between the trees.
         BinaryTree y = new BinaryTree();
         y.insert(5);
@@ -154,7 +181,7 @@ public class BinaryTree {
         y.insert(4);
         y.insert(7);
         y.insert(0);
-        y.display(y.root);
-        x.findCommon(x.root, y.root);
+        //y.display(y.root);
+        //x.findCommon(x.root, y.root);
     }
 }

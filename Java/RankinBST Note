@@ -1,0 +1,19 @@
+Given a BST
+Created a sorted Doubly Linked List
+
+
+---
+
+Find rank of the tree
+Algo :
+P.S. : Rank is strictly left!
+
+1. Go the current node.
+   -Return size of left subtree.
+2. If key < current.key
+   - Go to the left subtree
+   i.e. =>  current = current.left
+   Go to step 1.
+3. if key > current.key
+    - Go to the right subtree
+    => 1 + sizeof(left subtree) + rank(current.right)
