@@ -5,10 +5,11 @@ public class BinaryTree {
         int key;
         Node right;
         Node left;
-
-        public Node(int item) {  //This parameterized constructor now overrides the default method of constructor. Thus only this is how const. can be called.
+        int w;
+        public Node(int item, int width) {  //This parameterized constructor now overrides the default method of constructor. Thus only this is how const. can be called.
             key = item;
             right = left = null;
+            w = width;
         }
     }
 
@@ -19,25 +20,21 @@ public class BinaryTree {
     }
 
     void insert(int key) {
-        root = insertNode(root,key);
+        root = insertNode(root,key, 0);
     }
 
-    Node insertNode(Node n, int key) {
+    Node insertNode(Node n, int key, int w) {
 
-        if(n == null)
-        {
-            return new Node(key);
-        }
-        if(n.key == key) {//donot update
+        if(n == null) {
+            return new Node(key, w);
         }
         else if(key < n.key) {  //if n.key < key then go to the left side of the tree.
-            n.left = insertNode(n.left,key);
+            n.left = insertNode(n.left, key, n.w-1);
         }
         else {          //if n.key > key then go to the right side of the tree.
-            n.right = insertNode(n.right, key);
+            n.right = insertNode(n.right, key, n.w+1);
         }
         return n;
-
     }
 
     boolean search(Node n, int key) {
@@ -73,8 +70,9 @@ public class BinaryTree {
     void display(Node n) {
 
         if(n != null) {  //Inorder traversal, thus also shows the sorted array. (ascending order)
+
             display(n.left);
-            System.out.println(n.key);
+            System.out.println(n.key + " width = " + n.w);
             display(n.right);
         }
     }
@@ -98,10 +96,12 @@ public class BinaryTree {
                 return root.right;
 
             root.key = getMin(root.right);
-            root.right = delNode(root.right, key);
+            root.right = delNode(root.right, root.key);
         }
         return root;
     }
+
+
 
     ArrayList<Integer> generateInorder(Node root, ArrayList<Integer> x) {
         if(root!=null) {
@@ -124,11 +124,7 @@ public class BinaryTree {
         System.out.println("Success! 1. The PreOrder matches!");
     }
 
-     void findCommon(Node root1, Node root2) { //Yet to be completed.
-        ArrayList<Integer> one = new ArrayList<Integer>();
-        ArrayList<Integer> two = new ArrayList<Integer>();
 
-    }
 
     public static void main(String args[]) {
         System.out.println("BST!");
@@ -181,7 +177,7 @@ public class BinaryTree {
         y.insert(4);
         y.insert(7);
         y.insert(0);
-        //y.display(y.root);
-        //x.findCommon(x.root, y.root);
+        y.display(y.root);
+
     }
 }

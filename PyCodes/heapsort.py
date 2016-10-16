@@ -1,6 +1,7 @@
-#Program for heapSort.
-#Language : Python 2.7.2
+#Program for HeapSort
 #Time Complexity : O(nlogn)
+#Language : Python 2.7
+
 
 def max_heapify(i,n):
     left = 2*i
