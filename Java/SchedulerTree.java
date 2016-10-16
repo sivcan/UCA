@@ -2,14 +2,12 @@ import java.util.*;
 
 class Priority {
 
-    class Node {
         int averageTime;
         int meanTime;
 
-        Node(int a, int b) {
-            averageTime = a;
-            meanTime = b;
-        }
+    Priority(int a, int b) {
+        this.averageTime = a;
+        this.meanTime = b;
     }
 
     int getAverageTime() {
@@ -29,6 +27,10 @@ class Process {
     Process(String x) {
         processName = x;
     }
+
+    public String getName() {
+        return this.processName;
+    }
 }
 
 class ByAvg implements Comparator {
@@ -37,7 +39,7 @@ class ByAvg implements Comparator {
         Priority p1 = (Priority) o1;
         Priority p2 = (Priority) o2;
         if(p1.getAverageTime() == p2.getAverageTime()) return 0;
-        else if(p1.getAverageTime() > p2.getAverage()) return 1;
+        else if(p1.getAverageTime() > p2.getAverageTime()) return 1;
         return -1;
     }
 
@@ -55,6 +57,7 @@ class ByMean implements Comparator{
 }
 
 public class SchedulerTree{
+
     class Node {
         Process x;
         Priority p;
@@ -62,8 +65,8 @@ public class SchedulerTree{
         Node right;
 
         Node(Priority xP, Process xD) {
-            x = xP;
-            p = xD;
+            x = xD;
+            p = xP;
             left = right = null;
         }
     }
@@ -71,22 +74,27 @@ public class SchedulerTree{
     public Node root = null;
 
     public void insert(Priority p, Process q, Comparator c) {
-        root = insertNode(p, q, c);
+        root = insertNode(root, p, q, c);
     }
 
-    private Node insertNode(Priority p, Process q, Comparator c) {
+    private Node insertNode(Node root, Priority p, Process q, Comparator c) {
         if(root == null) {
-            root = new Node(p,q);
+            return new Node(p,q);
         }
-        if(c.compare(root, ))
-
+        if(c.compare(root.p, p) < 0) {
+            root.left = insertNode(root.left, p, q, c);
+        }
+        else if(c.compare(root.p, p) > 0) {
+            root.right = insertNode(root.right, p, q, c);
+        }
+        return root;
     }
 
 
     public void inorder(Node root) {
         if(root != null) {
             inorder(root.left);
-            System.out.println(root.Process.processName);
+            System.out.println(root.x.getName());
             inorder(root.right);
         }
     }
@@ -95,18 +103,23 @@ public class SchedulerTree{
         System.out.println("Implementing Linux Scheduler using BST.");
         SchedulerTree x = new SchedulerTree();
 
-        Comparator c = new ByAvg();
+        Comparator c1 = new ByAvg();
         Comparator c2 = new ByMean();
-        Priority p1 = new Priority(2, 3);
-        Priority p2 = new Priority(4, 5);
-        Priority p3 = new Priority(6, 7);
 
-        Process
-        x.insert(p1, c);
-        x.insert(p2, c);
-        x.insert(p3, c);
+        Process pro1 = new Process("Process 1");
+        Process pro2 = new Process("Process 2");
+        Process pro3 = new Process("Process 3");
 
-        x.inorder();
+        Priority p1 = new Priority(8,20);
+        Priority p2 = new Priority(5,25);
+        Priority p3 = new Priority(10,30);
+
+
+        x.insert(p1, pro1, c1);
+        x.insert(p2, pro2, c1);
+        x.insert(p3, pro3, c1);
+
+        x.inorder(x.root);
     }
 
 }
