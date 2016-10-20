@@ -21,12 +21,12 @@ public class RedBlackTree {
     private Node root;
 
     RedBlackTree() {
-        root = new Node(10, BLACK);
-        //root.color = BLACK;
+        root = null;
     }
 
     public void insert(int key) {
         root = insertNode(root, key);
+        root.color = BLACK;
     }
 
     private Node insertNode(Node x, int key) {
@@ -45,9 +45,9 @@ public class RedBlackTree {
         }
 
          //Balancing the tree
-        if(!isRed(x.left) && isRed(x.right)) x = rotateLeft(x);
-        if(isRed(x.left) && isRed(x.left.left)) x = rotateRight(x);
-        if(isRed(x.left) && isRed(x.right)) flipColors(x);
+        if(!isRed(x.left) && isRed(x.right)) x = rotateLeft(x); //If left is not red and right is RED thus we rotate left.
+        if(isRed(x.left) && isRed(x.left.left)) x = rotateRight(x); // 4 temporary node, need to rotate it right to balance.
+        if(isRed(x.left) && isRed(x.right)) flipColors(x); //Flip colors thus split the temorary node.
 
         return x;
     }
@@ -75,8 +75,7 @@ public class RedBlackTree {
     }
 
     private boolean isRed(Node x) {
-        if(x == null) return false;
-        return(x.color == RED);
+        return x == null ? false : x.color  == RED;
     }
 
     private void flipColors(Node x) {
