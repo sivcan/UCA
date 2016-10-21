@@ -7,6 +7,9 @@ class Graph {
 
     public Graph(int v) {
         adj = new Bag[v];
+        for(int i = 0; i < v; i++) {
+            adj[i] = new Bag();
+        }
         E = 0;
         V = v;
     }
@@ -92,14 +95,16 @@ class Bag implements Iterable<Integer> {
 public class GraphBag {
 
     public static void main(String args[]) {
-        System.out.print("Graph Implementation.");
+        System.out.print("Graph Implementation.\n");
         Graph gp = new Graph(7);
-        gp.addEdge(2,3);
+        gp.addEdge(0,3);
         gp.addEdge(2,4);
-        gp.addEdge(2,8);
+        gp.addEdge(2,5);
         gp.addEdge(3,6);
         gp.addEdge(4,2);
 
+        //Display function call.
         gp.adj(2);
+        gp.adj(4);
     }
 }
