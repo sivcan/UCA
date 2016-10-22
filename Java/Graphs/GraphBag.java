@@ -36,7 +36,15 @@ class Graph {
     public void findPath(Graph g, int v) {
         DFS ob = new DFS(g, v);
         ob.displayPath();
-        System.out.println("\nThe graph is has a path to : " + ob.hasPathTo(v-1)); //Just testing. 
+        System.out.println("\nThe graph has a path from " + v + " to  " + (v - 1) + " is : " + ob.hasPathTo(v-1)); //Just testing.
+    }
+
+
+    public void pathBetween(Graph g, int v, int w){
+        DFS ob = new DFS(g, v);
+        if(ob.hasPathTo(w)) {
+            ob.displayPath();
+        }
     }
 
     private class DFS {
@@ -157,5 +165,6 @@ public class GraphBag {
         gp.addEdge(3, 3);
         //Printing the connected path.
         gp.findPath(gp, 2);
+        gp.pathBetween(gp, 1,2);
     }
 }
