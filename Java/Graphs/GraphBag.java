@@ -2,23 +2,28 @@ import java.util.*;
 
 
 class Graph {
-    int V, E;
-    Bag[] adj;
+    private int V, E;
+    public Bag[] adj;
 
     public Graph(int v) {
         adj = new Bag[v];
+
         for(int i = 0; i < v; i++) {
             adj[i] = new Bag();
         }
-        E = 0;
-        V = v;
+
+        this.E = 0;
+        this.V = v;
     }
 
+    public vertexSize() {
+        return V;
+    }
 
     public void addEdge(int v, int w) {
-        adj[v].enqueue(w);
-        adj[w].enqueue(v);
-        E += 2;
+        this.adj[v].enqueue(w);
+        this.adj[w].enqueue(v);
+        E += 1;
     }
 
     public void adj(int v) {
@@ -28,7 +33,43 @@ class Graph {
         }
     }
 
+    private class DFS {
+        private boolean[] marked;
+        private int[] edgeTo;
+
+        public DFS(Graph g, int s) {
+            marked = new boolean[g.vertexSize()];
+            edgeTo = new int[g.vertexSize()];
+
+            for(int i = 0; i < g.vertexSize(); i++) {
+                edgeTo[i] = Integer.MAX_VALUE;
+            }
+
+            dfs(g,s);
+        }
+
+        private void dfs(Graph g, int v) {
+            marked[v] = true;
+            Iterator ite = g.adj[v].iterator();
+
+            while(ite.hasNext()) {
+                int x = ite.next();
+                if(!marked[x]) {
+                    edgeTo[x] = v;
+                    dfs(g,x);
+                }
+            }
+        }
+
+        public boolean hasPathTo(int v) {
+            return marked[v];
+        }
+
+
+    }
 }
+
+
 
 class Node {
     int key;
