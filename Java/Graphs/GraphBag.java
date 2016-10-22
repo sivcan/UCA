@@ -16,7 +16,7 @@ class Graph {
         this.V = v;
     }
 
-    public vertexSize() {
+    public int vertexSize() {
         return V;
     }
 
@@ -31,6 +31,11 @@ class Graph {
         while(ite.hasNext()) {
             System.out.println(ite.next());
         }
+    }
+
+    public void findPath(Graph g, int v) {
+        DFS ob = new DFS(g, v);
+        ob.displayPath();
     }
 
     private class DFS {
@@ -48,16 +53,23 @@ class Graph {
             dfs(g,s);
         }
 
+        private void displayPath() {
+            for(int i = 0; i < edgeTo.length; i++) {
+                if(edgeTo[i] != Integer.MAX_VALUE)
+                    System.out.print(edgeTo[i] + " ");
+            }
+        }
+
         private void dfs(Graph g, int v) {
             marked[v] = true;
             Iterator ite = g.adj[v].iterator();
 
             while(ite.hasNext()) {
-                int x = ite.next();
+                int x = (int)ite.next();
                 if(!marked[x]) {
-                    edgeTo[x] = v;
                     dfs(g,x);
                 }
+                edgeTo[x] = v;
             }
         }
 
@@ -137,15 +149,17 @@ public class GraphBag {
 
     public static void main(String args[]) {
         System.out.print("Graph Implementation.\n");
-        Graph gp = new Graph(7);
-        gp.addEdge(0,3);
-        gp.addEdge(2,4);
-        gp.addEdge(2,5);
-        gp.addEdge(3,6);
-        gp.addEdge(4,2);
+        Graph gp = new Graph(5);
+        gp.addEdge(0,4);
+        gp.addEdge(4,1);
+        gp.addEdge(2,3);
+        //gp.addEdge(3,6);
+        //gp.addEdge(4,2);
 
         //Display function call.
-        gp.adj(2);
-        gp.adj(4);
+        //gp.adj(2);
+        //gp.adj(4);
+
+        gp.findPath(gp, 1);
     }
 }
