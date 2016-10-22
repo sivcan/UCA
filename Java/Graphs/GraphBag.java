@@ -22,7 +22,7 @@ class Graph {
 
     public void addEdge(int v, int w) {
         this.adj[v].enqueue(w);
-        this.adj[w].enqueue(v);
+        //this.adj[w].enqueue(v);
         E += 1;
     }
 
@@ -36,40 +36,33 @@ class Graph {
     public void findPath(Graph g, int v) {
         DFS ob = new DFS(g, v);
         ob.displayPath();
+        System.out.println("\nThe graph is has a path to : " + ob.hasPathTo(v-1)); //Just testing. 
     }
 
     private class DFS {
         private boolean[] marked;
-        private int[] edgeTo;
+        private ArrayList<Integer> edgeTo = new ArrayList<>();
 
         public DFS(Graph g, int s) {
             marked = new boolean[g.vertexSize()];
-            edgeTo = new int[g.vertexSize()];
-
-            for(int i = 0; i < g.vertexSize(); i++) {
-                edgeTo[i] = Integer.MAX_VALUE;
-            }
-
             dfs(g,s);
         }
 
         private void displayPath() {
-            for(int i = 0; i < edgeTo.length; i++) {
-                if(edgeTo[i] != Integer.MAX_VALUE)
-                    System.out.print(edgeTo[i] + " ");
+            for(int i = 0; i < edgeTo.size(); i++) {
+                    System.out.print(edgeTo.get(i) + " ");
             }
         }
 
         private void dfs(Graph g, int v) {
             marked[v] = true;
+            edgeTo.add(v);
             Iterator ite = g.adj[v].iterator();
-
             while(ite.hasNext()) {
                 int x = (int)ite.next();
                 if(!marked[x]) {
                     dfs(g,x);
                 }
-                edgeTo[x] = v;
             }
         }
 
@@ -149,17 +142,20 @@ public class GraphBag {
 
     public static void main(String args[]) {
         System.out.print("Graph Implementation.\n");
-        Graph gp = new Graph(5);
-        gp.addEdge(0,4);
-        gp.addEdge(4,1);
-        gp.addEdge(2,3);
+        Graph gp = new Graph(4);
         //gp.addEdge(3,6);
         //gp.addEdge(4,2);
 
         //Display function call.
         //gp.adj(2);
         //gp.adj(4);
-
-        gp.findPath(gp, 1);
+        gp.addEdge(0, 1);
+        gp.addEdge(0, 2);
+        gp.addEdge(1, 2);
+        gp.addEdge(2, 0);
+        //gp.addEdge(2, 3);
+        gp.addEdge(3, 3);
+        //Printing the connected path.
+        gp.findPath(gp, 2);
     }
 }
