@@ -1,6 +1,5 @@
 import java.util.*;
 
-
 class Graph {
     private int V, E;
     public Bag[] adj;

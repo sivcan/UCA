@@ -6,15 +6,13 @@ public class Deque<Item> implements Iterable<Item> {
     private Node last;
     private int N;
 
-    private class Node {   //Node for the deque
+    class Node {   //Node for the deque
 
         private Item item;
         private Node prev;
         private Node next;
 
     }
-
-    public Deque() {}
 
     public boolean isEmpty() {  //Function to check if the deque is empty or not.
         return 0 == N;
@@ -39,8 +37,6 @@ public class Deque<Item> implements Iterable<Item> {
 
 
             public Item next() {       //Returns the next item on the deque.
-                if(curr == null)
-                    throw new NoSuchElementException();
                 Item item = curr.item;
                 curr = curr.next;
                 return item;
@@ -48,8 +44,15 @@ public class Deque<Item> implements Iterable<Item> {
 
 
             public void remove() {
-                throw new UnsupportedOperationException();
+                //do nothing
             }
+    }
+
+    public void display() {
+        Iterator ite = iterator();
+        while(ite.hasNext()) {
+            System.out.println((Item)ite.next());
+        }
     }
 
     public void addFirst(Item item) {
@@ -84,16 +87,14 @@ public class Deque<Item> implements Iterable<Item> {
 
     public static void main(String args[]) {
         Deque<String> dq = new Deque<String>();
-        Iterator<String> x = dq.iterator();
+
         System.out.println(dq.isEmpty());
         System.out.println(dq.size());
 
         dq.addFirst("Sivcan");
         dq.addFirst("DeaMan");
         dq.addFirst("Holy!");
-        while(x.hasNext()) {
-            System.out.println(x.next());
-        }
+        dq.display();
 
         // x.addLast("ML");
         // x.addLast("DP");

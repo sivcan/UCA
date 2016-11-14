@@ -26,7 +26,7 @@ public class RedBlackTree {
 
     public void insert(int key) {
         root = insertNode(root, key);
-        root.color = BLACK;
+        root.color = BLACK; //very imp. We don't care what's going on below, we always keep the root as a black node.
     }
 
     private Node insertNode(Node x, int key) {
@@ -51,6 +51,7 @@ public class RedBlackTree {
 
         return x;
     }
+
 
     private Node rotateLeft(Node x) {
         Node h = x.right;
