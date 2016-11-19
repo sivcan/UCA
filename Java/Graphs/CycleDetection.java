@@ -1,6 +1,6 @@
 import java.util.*;
 
-class Graphz{
+class Graphz {
     private int V;
     private int E;
     private LinkedList<Integer>[] adj;
@@ -59,4 +59,5 @@ public class CycleDetection {
         x.addEdge(2,1);
         x.CycleDetection();
     }
+
 }
