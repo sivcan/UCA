@@ -1,5 +1,5 @@
 ## UCA Codes
-This repository contains different codes related to Advanced Programming Concepts and Data Structures.
+This repository contains different codes related to Advanced Programming Concepts, Data Structures and Operating Systems.
 
 ## Developer 
 Sivcan Singh 
