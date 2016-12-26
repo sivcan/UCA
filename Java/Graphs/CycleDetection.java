@@ -16,7 +16,7 @@ class Graphz {
             adj[i] = new LinkedList<>();
             marked[i] = false;
         }
-
+        
         isCycle = false;
     }
 
@@ -47,6 +47,7 @@ class Graphz {
         }
     }
 }
+
 
 public class CycleDetection {
 
